@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product Category</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        h2 {
+            color: #555;
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 22px); /* Adjusted width for button */
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            text-align: left;
+        }
+
+        .delete-category-button {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .delete-category-button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Add Product Category</h1>
+        <form id="add-category-form" action="{% url 'sub_category' %}" method="post">
+            <div class="add-category-container">
+                <div class="form-group">
+                    <label for="categoryName">Category Name:</label>
+                    <input type="text" id="name" name="name" placeholder="Enter category name" required>
+                </div>
+                <button type="submit" id="add-category-button">Add Category</button>
+            </div>
+            <p class="error-message" id="categoryError"></p>
+        </form>
+        <h2>Existing Categories</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Action</th> <!-- New column for the delete button -->
+                </tr>
+            </thead>
+            <tbody id="category-list">
+                <!-- JavaScript will populate this section -->
+            </tbody>
+        </table>
+    </div>
+
+    <!--<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Pre-populate existing categories
+            var existingCategories = ["AYURVEDIC ARISHTAS & ASAVAS", "AYURVEDIC CHOORNAS & POWDERS", "AYURVEDIC KASHYAMS & KWATHAMS"];
+            var categoryList = document.getElementById('category-list');
+            existingCategories.forEach(function(category) {
+                var row = document.createElement('tr');
+                var categoryCell = document.createElement('td');
+                categoryCell.textContent = category;
+                var actionCell = document.createElement('td');
+                var deleteButton = document.createElement('button');
+                deleteButton.classList.add('delete-category-button');
+                deleteButton.textContent = 'Delete';
+                actionCell.appendChild(deleteButton);
+                row.appendChild(categoryCell);
+                row.appendChild(actionCell);
+                categoryList.appendChild(row);
+            });
+
+            // Form submission event
+            document.getElementById('add-category-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                var categoryName = document.getElementById('name').value.trim();
+                var categoryError = document.getElementById('categoryError');
+                // Validation: Only allow specific category names
+                var allowedCategories = ["AYURVEDIC ARISHTAS & ASAVAS", "AYURVEDIC CHOORNAS & POWDERS", "AYURVEDIC KASHYAMS & KWATHAMS","AYURVEDIC RASAYANAS & LEHYAMS"];
+                if (allowedCategories.indexOf(categoryName.toUpperCase()) === -1) {
+                    categoryError.textContent = 'Only specific categories are allowed.';
+                    return;
+                }
+                categoryError.textContent = '';
+
+                // Clear input field
+                document.getElementById('name').value = '';
+
+                // Add category to the list
+                var row = document.createElement('tr');
+                var categoryCell = document.createElement('td');
+                categoryCell.textContent = categoryName;
+                var actionCell = document.createElement('td');
+                var deleteButton = document.createElement('button');
+                deleteButton.classList.add('delete-category-button');
+                deleteButton.textContent = 'Delete';
+                actionCell.appendChild(deleteButton);
+                row.appendChild(categoryCell);
+                row.appendChild(actionCell);
+                categoryList.appendChild(row);
+            });
+
+            // Delete category button click event
+            categoryList.addEventListener('click', function(event) {
+                if (event.target.classList.contains('delete-category-button')) {
+                    var row = event.target.closest('tr');
+                    row.remove();
+                }
+            });
+        });
+    </script>-->
+</body>
+</html>
